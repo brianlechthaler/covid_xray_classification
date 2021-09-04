@@ -1,0 +1,11 @@
+# ML Libraries
+keras
+tensorflow
+
+# For Converting Models to TensorFlow.js
+tensorflowjs
+
+# Dataset Downloading
+kaggle
+
+# Data Transformation
