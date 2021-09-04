@@ -1,4 +1,3 @@
-from subprocess import run as __run__
 from pandas import read_csv as __readcsv__
 
 
