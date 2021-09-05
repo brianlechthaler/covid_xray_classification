@@ -9,3 +9,4 @@ tensorflowjs
 kaggle
 
 # Data Transformation
+pandas
