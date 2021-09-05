@@ -36,7 +36,7 @@ class Reshape:
     Args:
         table(pandas.DataFrame): Pandas DataFrame containing filenames and their corresponding classification. (default pandas.DataFrame())
         input_folder(str): Folder containing unsorted images. (default 'dataset')
-        column_fiename(str): Column containing file names. (default 'filename')
+        column_filename(str): Column containing file names. (default 'filename')
         column_classification(str): Column containing a filename's corresponding classification. (default 'classification')"""
     def __init__(self,
                  table=__df__(),
