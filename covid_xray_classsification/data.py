@@ -1,5 +1,6 @@
 from pandas import read_csv as __readcsv__
 from covid_xray_classsification.cmd import Runner as __runner__
+from pandas import DataFrame as __df__
 
 
 class Downloader:
@@ -24,3 +25,27 @@ class Downloader:
         __runner__(command=['kaggle', 'datasets', 'download',
                             '-d', self.dataset,  # Specify dataset we wish to download.
                             '-p', saveTo])  # Specify the directory to which we wish to download our dataset of choice.
+
+
+class Reshape:
+    """Turn a folder full of images and a DataFrame containing filenames and their corresponding classification into directories named after their content's classification.
+
+    Args:
+        table(pandas.DataFrame): Pandas DataFrame containing filenames and their corresponding classification. (default pandas.DataFrame())
+        input_folder(str): Folder containing unsorted images. (default 'dataset')
+        column_fiename(str): Column containing file names. (default 'filename')
+        column_classification(str): Column containing a filename's corresponding classification. (default 'classification')"""
+    def __init__(self,
+                 table=__df__(),
+                 input_folder='dataset',
+                 column_filename='filename',
+                 column_classification='classification'):
+        # Move values specified at class instantiation to self, making sure to remove param vars to reduce memory usage.
+        self.table = table
+        del table
+        self.input_folder = input_folder
+        del input_folder
+        self.column_filename = column_filename
+        del column_filename
+        self.column_classification = column_classification
+        del column_classification
