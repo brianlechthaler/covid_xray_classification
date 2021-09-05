@@ -10,7 +10,10 @@ class Downloader:
         dataset(str): Specify a dataset to download from kaggle with user/dataset formatting. (default 'andyczhao/covidx-cxr2')"""
     def __init__(self,
                  dataset='andyczhao/covidx-cxr2'):
-        self.dataset_id = dataset
+        # Move values specified at class instantiation to self, making sure to remove param vars to reduce memory usage.
+        self.dataset = dataset
+        del dataset
+
     def download(self, saveTo='dataset'):
         """
         Download dataset to specified location, creating the specified location should it not exist at time of function invocation.
