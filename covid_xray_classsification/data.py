@@ -1,4 +1,3 @@
-from pandas import read_csv as __readcsv__
 from covid_xray_classsification.cmd import Runner as __runner__
 from pandas import DataFrame as __df__
 from os import pathsep as __pthsep__
