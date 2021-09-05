@@ -137,3 +137,6 @@ cache/
 # Sphinx Documentation
 _apidoc/
 _build/
+
+# macOS
+.DS_Store
