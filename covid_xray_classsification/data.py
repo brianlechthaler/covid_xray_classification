@@ -1,6 +1,7 @@
 from pandas import read_csv as __readcsv__
 from covid_xray_classsification.cmd import Runner as __runner__
 from pandas import DataFrame as __df__
+from os import pathsep as __pthsep__
 
 
 class Downloader:
@@ -51,7 +52,7 @@ class Downloader:
         download_dataset.run()
 
 
-class Reshape:
+class Reshaper:
     """Turn a folder full of images and a DataFrame containing filenames and their corresponding classification into directories named after their content's classification.
 
     Args:
@@ -76,3 +77,33 @@ class Reshape:
         self.column_classification = column_classification
         del column_classification
         self.output_folder = output_folder
+        del output_folder
+
+        # Create a variable to keep track of created directories.
+        self.created_directories = []
+
+    def reshape(self):
+        """Reshape dataset according to params specified at instantiation. Takes no arguments, returns nothing."""
+        # Loop over each row in our DataFrame.
+        for index, column in self.table.iterrows():
+            # Check if the columns we need exist in this row.
+            if column[self.column_filename] and column[self.column_classification]:
+                # Check if we need to create a directory that we're about to move something to.
+                if column[self.column_classification] not in self.created_directories:
+                    # Formulate command to make the directory we need.
+                    mkdir = __runner__(['mkdir',
+                                        '-p', f"{self.output_folder}{__pthsep__}{column[self.column_classification]}"])
+                    # Run the command to make the directory we need.
+                    mkdir.run()
+                    # Append the created directory's name to a list to prevent running mkdir when not necessary.
+                    self.created_directories.append(column[self.column_classification])
+
+                # Formulate command to move the file where it needs to go.
+                mv = __runner__(['mv',
+                                 f"{self.input_folder}{__pthsep__}{column[self.column_classification]}{__pthsep__}{column[self.column_filename]}",
+                                 f"{self.output_folder}{__pthsep__}{column[self.column_classification]}{__pthsep__}{column[self.column_filename]}"])
+                # Run the command to move the file where it needs to go.
+                mv.run()
+            else:
+                # Raise an exception if critical column values are missing.
+                raise Exception("Row does not contain necessary columns.")
