@@ -57,11 +57,13 @@ class Reshape:
     Args:
         table(pandas.DataFrame): Pandas DataFrame containing filenames and their corresponding classification. (default pandas.DataFrame())
         input_folder(str): Folder containing unsorted images. (default 'dataset')
+        output_folder(str): Folder to contain the reshaped dataset. (default 'reshaped_dataset')
         column_filename(str): Column containing file names. (default 'filename')
         column_classification(str): Column containing a filename's corresponding classification. (default 'classification')"""
     def __init__(self,
                  table=__df__(),
                  input_folder='dataset',
+                 output_folder='reshaped_dataset',
                  column_filename='filename',
                  column_classification='classification'):
         # Move values specified at class instantiation to self, making sure to remove param vars to reduce memory usage.
@@ -73,3 +75,4 @@ class Reshape:
         del column_filename
         self.column_classification = column_classification
         del column_classification
+        self.output_folder = output_folder
