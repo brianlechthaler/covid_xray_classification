@@ -1,6 +1,6 @@
 from subprocess import run as __run__
 from pandas import DataFrame as __df__
-from os import pathsep as __pthsep__
+from os.path import join as __join__
 
 
 class Downloader:
@@ -82,16 +82,20 @@ class Reshaper:
                 # Check if we need to create a directory that we're about to move something to.
                 if column[self.column_classification] not in self.created_directories:
                     # Formulate command to make the directory we need.
-                    mkdir = __run__(['mkdir',
-                                     '-p', f"{self.output_folder}{__pthsep__}{column[self.column_classification]}"],
-                                    check=True)  # Append the created directory's name to a list to prevent running mkdir when not necessary.
+                    __run__(['mkdir',
+                             '-p', __join__(self.output_folder, column[self.column_classification])],
+                             check=True)  # Append the created directory's name to a list to prevent running mkdir when not necessary.
                     self.created_directories.append(column[self.column_classification])
 
                 # Formulate command to move the file where it needs to go.
-                mv = __run__(['mv',
-                                 f"{self.input_folder}{__pthsep__}{column[self.column_classification]}{__pthsep__}{column[self.column_filename]}",
-                                 f"{self.output_folder}{__pthsep__}{column[self.column_classification]}{__pthsep__}{column[self.column_filename]}"],
-                             check=True)
+                __run__(['mv',
+                         __join__(self.input_folder,
+                                  column[self.column_classification],
+                                  column[self.column_filename]),
+                         __join__(self.output_folder,
+                                  column[self.column_classification],
+                                  column[self.column_filename])],
+                        check=True)
             else:
                 # Raise an exception if critical column values are missing.
                 raise Exception("Row does not contain necessary columns.")
