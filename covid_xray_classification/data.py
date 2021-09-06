@@ -1,4 +1,4 @@
-from covid_xray_classsification.cmd import Runner as __runner__
+from covid_xray_classification.cmd import Runner as __runner__
 from pandas import DataFrame as __df__
 from os import pathsep as __pthsep__
 
