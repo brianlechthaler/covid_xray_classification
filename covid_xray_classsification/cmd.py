@@ -13,7 +13,6 @@ class Runner:
         self.command = command
         del command
         self.result = None
-        del command
 
     def run(self):
         """Run command specified at class instantiation. Takes no parameters, and does not return anything."""
