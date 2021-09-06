@@ -80,21 +80,19 @@ class Reshaper:
             # Check if the columns we need exist in this row.
             if column[self.column_filename] and column[self.column_classification]:
                 # Check if we need to create a directory that we're about to move something to.
-                if column[self.column_classification] not in self.created_directories:
-                    # Formulate command to make the directory we need.
-                    __run__(['mkdir',
-                             '-p', __join__(self.output_folder, column[self.column_classification])],
-                             check=True)  # Append the created directory's name to a list to prevent running mkdir when not necessary.
-                    self.created_directories.append(column[self.column_classification])
+                # Formulate command to make the directory we need.
+                __run__(['mkdir',
+                         '-p', __join__(self.output_folder,
+                                        column[self.column_classification])],
+                         check=True)  # Append the created directory's name to a list to prevent running mkdir when not necessary.
 
                 # Formulate command to move the file where it needs to go.
                 __run__(['mv',
                          __join__(self.input_folder,
-                                  column[self.column_classification],
                                   column[self.column_filename]),
                          __join__(self.output_folder,
                                   column[self.column_classification],
-                                  column[self.column_filename])],
+                                  column[self.column_filename]),],
                         check=True)
             else:
                 # Raise an exception if critical column values are missing.
