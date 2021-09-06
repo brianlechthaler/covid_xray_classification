@@ -1,4 +1,4 @@
-from covid_xray_classification.cmd import Runner as __runner__
+from subprocess import run as __run__
 from pandas import DataFrame as __df__
 from os import pathsep as __pthsep__
 
@@ -26,8 +26,7 @@ class Downloader:
         """
         # ---- Part 1/2: Setup ----
         # Create our directory in case it does not exist yet.
-        create_directory = __runner__(command=['mkdir',
-                                               '-p', save_to]) # Specify the path of the directory we wish to create.
+        __run__(['mkdir', '-p', save_to], check=True)  # Specify the path of the directory we wish to create.
 
         # Form command to download dataset
         dataset_download_command = [
@@ -41,14 +40,7 @@ class Downloader:
             dataset_download_command.append('--unzip')
 
         # Download dataset to specified path.
-        download_dataset = __runner__(command=dataset_download_command)  # Specify the directory to which we wish to download our dataset of choice.
-
-        # ---- Part 2/2: Runtime ----
-        # Run the command to create a directory in case we need to.
-        create_directory.run()
-
-        # Run the command to download our dataset, optionally unzipping it.
-        download_dataset.run()
+        __run__(dataset_download_command, check=True)  # Specify the directory to which we wish to download our dataset of choice.
 
 
 class Reshaper:
@@ -90,19 +82,16 @@ class Reshaper:
                 # Check if we need to create a directory that we're about to move something to.
                 if column[self.column_classification] not in self.created_directories:
                     # Formulate command to make the directory we need.
-                    mkdir = __runner__(['mkdir',
-                                        '-p', f"{self.output_folder}{__pthsep__}{column[self.column_classification]}"])
-                    # Run the command to make the directory we need.
-                    mkdir.run()
-                    # Append the created directory's name to a list to prevent running mkdir when not necessary.
+                    mkdir = __run__(['mkdir',
+                                     '-p', f"{self.output_folder}{__pthsep__}{column[self.column_classification]}"],
+                                    check=True)  # Append the created directory's name to a list to prevent running mkdir when not necessary.
                     self.created_directories.append(column[self.column_classification])
 
                 # Formulate command to move the file where it needs to go.
-                mv = __runner__(['mv',
+                mv = __run__(['mv',
                                  f"{self.input_folder}{__pthsep__}{column[self.column_classification]}{__pthsep__}{column[self.column_filename]}",
-                                 f"{self.output_folder}{__pthsep__}{column[self.column_classification]}{__pthsep__}{column[self.column_filename]}"])
-                # Run the command to move the file where it needs to go.
-                mv.run()
+                                 f"{self.output_folder}{__pthsep__}{column[self.column_classification]}{__pthsep__}{column[self.column_filename]}"],
+                             check=True)
             else:
                 # Raise an exception if critical column values are missing.
                 raise Exception("Row does not contain necessary columns.")
