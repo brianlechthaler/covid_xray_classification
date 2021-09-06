@@ -26,6 +26,7 @@ class Runner:
         # Run command, store results in self.result.
         self.result = __cmd__(self.command)
         # Check if the command executed successfully.
+        # TODO: Instead of using this, just use subprocess' built-in check parameter
         if self.result.returncode != 0:
             # Don't report return code in exception.
             exception_text = f"Command execution returned non-zero exit status."
