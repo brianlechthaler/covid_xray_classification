@@ -1,25 +1,26 @@
 from tensorflow.keras import layers as __layers__
 from tensorflow.keras import Input as __input__
-from keras import Sequential as __sequential__
-from keras import Model as __model__
+from tensorflow.keras import Sequential as __sequential__
+from tensorflow.keras import Model as __model__
 
 
 class Small:
     """Generate a small Xception network.
 
     Args:
-        input_shape(tuple): Input dimensions. (default (256,256))
+        image_size(tuple): Size of input images. (default (256,256))
         num_classes(int): Positive integer describing the number of classes. (default 2)
         """
     def __init__(self,
-                 input_shape=(256, 256),
+                 image_size=(256, 256),
                  num_classes=2):
-        inputs = __input__(shape=input_shape)
+        inputs = __input__(shape=image_size + (3,))
         # Image augmentation block
-        layers = __sequential__(inputs)
+        augmentation = __sequential__([])
+        layers = augmentation(inputs)
 
         # Entry block
-        layers = __layers__.Rescaling(1.0 / 255)(layers)
+        layers = __layers__.experimental.preprocessing.Rescaling(1.0 / 255)(layers)
         layers = __layers__.Conv2D(32, 3, strides=2, padding="same")(layers)
         layers = __layers__.BatchNormalization()(layers)
         layers = __layers__.Activation("relu")(layers)
