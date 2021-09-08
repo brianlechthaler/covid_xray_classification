@@ -20,7 +20,6 @@ class Small:
         layers = augmentation(inputs)
 
         # Entry block
-        layers = __layers__.experimental.preprocessing.Rescaling(1.0 / 255)(layers)
         layers = __layers__.Conv2D(32, 3, strides=2, padding="same")(layers)
         layers = __layers__.BatchNormalization()(layers)
         layers = __layers__.Activation("relu")(layers)
