@@ -1,6 +1,6 @@
 # ML Libraries
 keras
-tensorflow==2.5.0
+tensorflow
 
 # For Converting Models to TensorFlow.js
 tensorflowjs
