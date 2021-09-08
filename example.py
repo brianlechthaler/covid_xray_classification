@@ -9,7 +9,7 @@ from tensorflow.keras.preprocessing import image_dataset_from_directory
 
 
 # Download default dataset to default location
-# Downloader().download()
+Downloader().download()
 
 
 # Specify a few runtime variables
