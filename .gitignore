@@ -140,3 +140,6 @@ _build/
 
 # macOS
 .DS_Store
+
+# Created from example.py
+dataset
