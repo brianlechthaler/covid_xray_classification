@@ -6,6 +6,7 @@ from os.path import join
 from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.preprocessing import image_dataset_from_directory
+from tensorflow.keras.metrics import BinaryAccuracy,Precision,Recall
 
 
 # Download default dataset to default location
@@ -58,12 +59,18 @@ callbacks = [EarlyStopping("val_accuracy",
                            mode='max',
                            restore_best_weights=True)]
 
+# Specify the metrics we wish to evaluate at the end of each epoch.
+metrics = ["accuracy",
+           BinaryAccuracy(),
+           Precision(name='precision'),
+           Recall(name='recall')]
+
 # Compile the model.
 # Here we use Adam as our optimizer, and binary_crossentropy as our loss as we are only doing binary classification:
 # in other words, if all we need is 0: negative, 1: positive
 model.compile(optimizer=Adam(learning_rate),
               loss="binary_crossentropy",
-              metrics=["accuracy"])
+              metrics=metrics)
 
 # Create a training dataset from 90% of the images in the dataset.
 train_dataset = image_dataset_from_directory(
