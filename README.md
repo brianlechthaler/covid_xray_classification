@@ -28,7 +28,6 @@ from tensorflow.keras.metrics import BinaryAccuracy,Precision,Recall
 # Download default dataset to default location
 Downloader().download()
 
-
 # Specify a few runtime variables
 columns = ['patientid',
            'filename',
@@ -37,10 +36,10 @@ columns = ['patientid',
 input_folder_prefix = 'dataset'
 reshaped_dataset_folder = 'reshaped'
 batch_size = 32
-image_size = (128,128)
+image_size = (256,256)
 rng_seed = 127001
 validation_split = 0.1
-epochs = 1
+epochs = 50
 learning_rate = 1e-3
 model_name = 'COVID_Chest_X-Ray_BinaryClassification_128x128'
 
