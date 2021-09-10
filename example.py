@@ -25,7 +25,7 @@ rng_seed = 127001
 validation_split = 0.1
 epochs = 50
 learning_rate = 1e-3
-model_name = 'COVID_Chest_X-Ray_BinaryClassification_128x128'
+model_name = 'COVID_Chest_X-Ray_BinaryClassification_256x256'
 
 # Make folders based on labels corresponding to the images the folders contain.
 # Here we put both train and test images in the same place, as we will split up the images ourselves later on.
