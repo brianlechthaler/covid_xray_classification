@@ -36,12 +36,12 @@ columns = ['patientid',
 input_folder_prefix = 'dataset'
 reshaped_dataset_folder = 'reshaped'
 batch_size = 32
-image_size = (256,256)
+image_size = (512,512)
 rng_seed = 127001
 validation_split = 0.1
 epochs = 50
 learning_rate = 1e-3
-model_name = 'COVID_Chest_X-Ray_BinaryClassification_128x128'
+model_name = 'COVID_Chest_X-Ray_BinaryClassification_512x512'
 
 # Make folders based on labels corresponding to the images the folders contain.
 # Here we put both train and test images in the same place, as we will split up the images ourselves later on.
@@ -69,9 +69,9 @@ model = net.model
 # Here we use the EarlyStopping callback to stop training if the validation accuracy stops increasing.
 # This both saves a significant amount of power and usually decreases the total number of epochs to a fraction of what most will end up specifying
 # We also make sure that this callback will automatically pick the best epoch at the end of training.
-callbacks = [EarlyStopping("val_precision",
+callbacks = [EarlyStopping("val_loss",
                            patience=10,
-                           mode='max',
+                           mode='min',
                            restore_best_weights=True)]
 
 # Specify the metrics we wish to evaluate at the end of each epoch.
@@ -126,4 +126,5 @@ model.fit(
 
 # Save our model for later use.
 model.save(join('dataset',model_name))
+
 ```
