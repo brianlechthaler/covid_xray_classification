@@ -7,6 +7,7 @@ from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.preprocessing import image_dataset_from_directory
 from tensorflow.keras.metrics import BinaryAccuracy,Precision,Recall
+from keras.callbacks import ModelCheckpoint
 
 
 # Download default dataset to default location
@@ -56,7 +57,9 @@ model = net.model
 callbacks = [EarlyStopping("val_loss",
                            patience=10,
                            mode='min',
-                           restore_best_weights=True)]
+                           restore_best_weights=True),
+             # Save the model at the end of each epoch.
+             ModelCheckpoint("epoch_{epoch}.h5")]
 
 # Specify the metrics we wish to evaluate at the end of each epoch.
 metrics = ["accuracy",
