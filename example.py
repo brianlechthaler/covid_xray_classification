@@ -20,12 +20,12 @@ columns = ['patientid',
 input_folder_prefix = 'dataset'
 reshaped_dataset_folder = 'reshaped'
 batch_size = 32
-image_size = (256,256)
+image_size = (512,512)
 rng_seed = 127001
 validation_split = 0.1
 epochs = 50
 learning_rate = 1e-3
-model_name = 'COVID_Chest_X-Ray_BinaryClassification_256x256'
+model_name = 'COVID_Chest_X-Ray_BinaryClassification_512x512'
 
 # Make folders based on labels corresponding to the images the folders contain.
 # Here we put both train and test images in the same place, as we will split up the images ourselves later on.
