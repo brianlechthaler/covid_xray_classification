@@ -143,3 +143,6 @@ _build/
 
 # Created from example.py
 dataset
+
+# Model Artifacts (HDF5)
+*.h5
