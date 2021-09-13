@@ -36,7 +36,7 @@ columns = ['patientid',
            'datasource']
 input_folder_prefix = 'dataset'
 reshaped_dataset_folder = 'reshaped'
-batch_size = 32
+batch_size = 16
 image_size = (512,512)
 rng_seed = 127001
 validation_split = 0.1
