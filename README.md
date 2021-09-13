@@ -127,6 +127,6 @@ model.fit(
     callbacks=callbacks,
     validation_data=val_ds)
 
-# Save our model for later use.
-model.save(join('dataset',model_name))
+model.save(join('dataset',
+                f"{model_name}.h5"))
 ```
