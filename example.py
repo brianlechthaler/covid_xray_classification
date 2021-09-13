@@ -3,11 +3,10 @@ from covid_xray_classification.models.xception import Small
 from covid_xray_classification.data import Downloader, Reshaper
 from pandas import read_csv
 from os.path import join
-from tensorflow.keras.callbacks import EarlyStopping
+from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.preprocessing import image_dataset_from_directory
 from tensorflow.keras.metrics import BinaryAccuracy,Precision,Recall
-from keras.callbacks import ModelCheckpoint
 
 
 # Download default dataset to default location
@@ -59,7 +58,10 @@ callbacks = [EarlyStopping("loss",
                            mode='min',
                            restore_best_weights=True),
              # Save the model at the end of each epoch.
-             ModelCheckpoint("epoch_{epoch}.h5")]
+             ModelCheckpoint("epoch_{epoch}.h5"),
+             # Log data to directory logs for TensorBoard
+             TensorBoard(
+                 log_dir="logs")]
 
 # Specify the metrics we wish to evaluate at the end of each epoch.
 metrics = ["accuracy",

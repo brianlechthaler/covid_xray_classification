@@ -146,3 +146,6 @@ dataset
 
 # Model Artifacts (HDF5)
 *.h5
+
+# TensorBoard
+logs/
