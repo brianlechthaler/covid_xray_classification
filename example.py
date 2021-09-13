@@ -54,8 +54,8 @@ model = net.model
 # Here we use the EarlyStopping callback to stop training if the validation accuracy stops increasing.
 # This both saves a significant amount of power and usually decreases the total number of epochs to a fraction of what most will end up specifying
 # We also make sure that this callback will automatically pick the best epoch at the end of training.
-callbacks = [EarlyStopping("val_loss",
-                           patience=10,
+callbacks = [EarlyStopping("loss",
+                           patience=5,
                            mode='min',
                            restore_best_weights=True),
              # Save the model at the end of each epoch.
