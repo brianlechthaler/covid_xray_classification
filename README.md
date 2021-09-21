@@ -1,7 +1,11 @@
 # COVID-19 Chest X-Ray Classification
 Detect COVID-19 from X-Ray images using Keras.
 
-## Quickstart
+## **⚠️ Disclaimer ⚠️**
+**Nothing in this repository should ever be considered fit for clinical use.**
+This project is intended to be a **proof-of-concept** demonstrating binary classification of images.
+
+## 🧩 Quickstart
 ```bash
 git clone https://github.com/brianlechthaler/covid_xray_classification
 cd covid_xray_classification
@@ -11,7 +15,7 @@ python setup.py build ; python setup.py install
 python example.py
 ```
 
-## Example
+## 📖 Example
 Available from `example.py`.
 ```python
 # Import everything we need
